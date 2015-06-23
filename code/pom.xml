@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- The Basics config -->
+	<groupId>com.work.app.dog</groupId>
+	<artifactId>dog</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0${dependency.version.ext}</version>
+	<name>dog social system</name>
+	
+	<!-- properties config -->
+	<properties>
+		<!-- spring version -->
+		<spring-version>3.2.0.RELEASE</spring-version>
+		<!-- social verison -->
+		<social.version>1.0.0</social.version>
+		<!-- ultron inner -->
+		<social-web.version>${social.version}</social-web.version>
+		<social-core.version>${social.version}</social-core.version>
+		<social-biz.version>${social.version}</social-biz.version>
+		<social-dal.version>${social.version}</social-dal.version>
+		<!-- encode -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	
+	<profiles>
+		<profile>
+			<id>default</id>
+			<properties>
+				<props>social-dev</props>
+				<dependency.version.ext>-SNAPSHOT</dependency.version.ext>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>project</id>
+			<properties>
+                <props>social-project</props>
+                <dependency.version.ext>-SNAPSHOT</dependency.version.ext>
+			</properties>
+		</profile>
+		<profile>
+			<id>publish</id>
+			<properties>
+				<props>social-real</props>
+				<dependency.version.ext/>
+			</properties>
+		</profile>
+	</profiles>
+	
+	<!-- dependency jar -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- springmvc begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+		    <dependency>
+		        <groupId>org.springframework</groupId>
+		        <artifactId>spring-expression</artifactId>
+		        <version>${spring-version}</version>
+		    </dependency>			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+			<!-- springmvc end -->
+			
+			<!-- fasterxml begin -->
+			<dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-core-asl</artifactId>
+	            <version>1.9.13</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-mapper-asl</artifactId>
+	            <version>1.9.13</version>
+	        </dependency>
+			<!-- fasterxml end -->
+			
+			<!-- swagger in order to manager and test Controller interface begin -->
+			<!-- https://github.com/swagger-api/swagger-ui -->
+			<dependency>
+				<groupId>com.mangofactory</groupId>
+				<artifactId>swagger-springmvc</artifactId>
+				<version>0.6.6</version>
+				<exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                    </exclusion>
+                    <exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-webmvc</artifactId>
+                    </exclusion>
+                    <exclusion>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+                    </exclusion>
+					<exclusion>
+						<groupId>commons-lang</groupId>
+						<artifactId>commons-lang</artifactId>
+                    </exclusion>
+                </exclusions>
+			</dependency>
+			<!-- swagger end-->
+			
+			<!-- json begin -->
+			<dependency>
+	            <groupId>com.alibaba</groupId>
+	            <artifactId>fastjson</artifactId>
+	            <version>1.1.39</version>
+	        </dependency>
+	        <!-- json end -->
+	         
+	        <!-- guava begin -->
+	        <dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>12.0.1</version>
+			</dependency>
+			<!-- guava end -->
+			
+			<!-- log4j begin -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.14</version>
+			</dependency>
+			<!-- log4j end -->
+			
+			<!-- servlet, in order to json Serialization begin -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.4</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- servlet, in order to json Serialization end -->
+			
+			<!-- validation begin -->
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.0.0.GA</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>4.1.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+			<!-- validation end -->
+			
+			<!-- junit test begin -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- junit test end -->
+			
+			<!-- diamond begin -->
+			<dependency>
+				<groupId>com.taobao.diamond</groupId>
+				<artifactId>diamond-client</artifactId>
+				<version>3.6.8</version>
+			</dependency>
+			<!-- diamond end -->
+
+			<!-- apache lang begin -->
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<!-- apache lang end -->
+			
+			<!-- dozer begin -->
+			<dependency>
+				<groupId>net.sf.dozer</groupId>
+				<artifactId>dozer</artifactId>
+				<version>5.5.1</version>
+			</dependency>
+			<!-- dozer end -->
+			
+			<!-- tair begin -->
+			<dependency>
+				<groupId>com.taobao.tair</groupId>
+				<artifactId>tair-client</artifactId>
+				<version>2.3.4.58</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.tair</groupId>
+				<artifactId>tair-mc-client</artifactId>
+				<version>1.0.4.22</version>
+			</dependency>
+			<!-- tair end -->
+
+			<!-- TDDL begin -->
+			<dependency>
+				<groupId>com.taobao.tddl</groupId>
+				<artifactId>tddl-client</artifactId>
+				<version>3.3.2.4</version>
+				<exclusions>
+                    <exclusion>
+                        <artifactId>commons-logging</artifactId>
+                        <groupId>commons-logging</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-core</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-beans</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+					<exclusion>
+						<artifactId>spring-orm</artifactId>
+						<groupId>org.springframework</groupId>						
+                    </exclusion>
+					<exclusion>
+						<groupId>com.alibaba</groupId>
+						<artifactId>druid</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>antlr</groupId>
+						<artifactId>antlr</artifactId>
+					</exclusion>
+                </exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.0.7</version>
+			</dependency>
+			<!-- TDDL end -->
+			
+			<!-- ibatis begin -->
+			<dependency>
+				<groupId>com.alibaba.external</groupId>
+				<artifactId>sourceforge.ibatis</artifactId>
+				<version>2.3.4.726-patch2.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+                </exclusions>
+			</dependency>
+			<!-- ibatis end -->
+			
+			<!-- simba begin -->
+			<!-- DTO -->
+			<dependency>
+				<groupId>com.alibaba.solar.mercury</groupId>
+				<artifactId>mercury-client</artifactId>
+				<version>1.3.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- UIC -->
+			<dependency>
+				<groupId>com.taobao.ad</groupId>
+				<artifactId>simba-user-interface</artifactId>
+				<version>1.1.14</version>
+			</dependency>
+			<!-- cache -->
+			<dependency>
+				<groupId>com.taobao.simba.common</groupId>
+				<artifactId>commoncache-provider</artifactId>
+				<version>1.1.0</version>
+			</dependency>
+            <!--adzone-->
+            <dependency>
+                <groupId>com.taobao.ad</groupId>
+                <artifactId>simba-interface</artifactId>
+                <version>2.3.5-SNAPSHOT</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>commons-logging</artifactId>
+                        <groupId>commons-logging</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>commons-beanutils</artifactId>
+                        <groupId>commons-beanutils</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.solar.commons</groupId>
+                <artifactId>solar-client</artifactId>
+                <version>1.0.6${dependency.version.ext}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+			<!-- simba end -->
+
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-core</artifactId>
+                <version>2.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+                <artifactId>ehcache-spring-annotations</artifactId>
+                <version>1.1.0-RC2</version>
+            </dependency>
+
+			<!-- DMP label service begin -->
+			<dependency>
+				<groupId>com.taobao.dmp.dsp.tagbuild</groupId>
+				<artifactId>interface</artifactId>
+				<version>1.0.2-SNAPSHOT</version>
+			</dependency>
+			<!-- DMP label service end -->
+
+			<!-- hsf本地测试环境 begin-->
+			<dependency>
+				<groupId>com.taobao.hsf</groupId>
+				<artifactId>hsfunit</artifactId>
+				<version>1.0.2-SNAPSHOT</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.hsf</groupId>
+				<artifactId>hsf.app.spring</artifactId>
+				<version>1.4.3</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.hsf</groupId>
+				<artifactId>hsf.services</artifactId>
+				<version>1.4.3</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.hsf</groupId>
+				<artifactId>hsf.lib</artifactId>
+				<version>1.4.3</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- hsf本地测试环境 end-->
+
+			<!-- qualification service begin -->
+			<dependency>
+				<artifactId>qualification-api</artifactId>
+				<groupId>com.taobao.simba</groupId>
+				<version>1.0.2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+                <groupId>com.taobao.simba</groupId>
+                <artifactId>saber-api</artifactId>
+                <version>1.4.1-SNAPSHOT</version>
+            </dependency>
+			<!-- qualification service end -->
+
+			<!-- spring test begin -->
+			<dependency>
+				<groupId>com.taobao.anntest</groupId>
+				<artifactId>anntest-spring3</artifactId>
+				<version>1.2.0-SNAPSHOT</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- spring test end -->
+			
+			<!-- 淘宝tbsession begin -->
+			<dependency>
+				<groupId>com.taobao.tbsession</groupId>
+				<artifactId>tbsession</artifactId>
+				<version>3.0.3.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ant</groupId>
+	  					<artifactId>ant</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.taobao.tair</groupId>
+	  					<artifactId>tair-mc-client</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.mmp</groupId>
+				<artifactId>mmp-client-web</artifactId>
+				<version>3.2.26</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.mmp</groupId>
+				<artifactId>mmp-client-core</artifactId>
+				<version>3.2.26</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.alibaba.toolkit.common.logging</groupId>
+						<artifactId>logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.taobao.tair</groupId>
+	  					<artifactId>tair-mc-client</artifactId>
+					</exclusion>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.common.logging</groupId>
+				<artifactId>toolkit-common-logging</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<!-- 淘宝tbsession end -->
+		
+			<!-- TaobaoUIC begin -->
+			<dependency>
+				<groupId>com.taobao.common.uic.uic-common</groupId>
+				<artifactId>common-uic-common</artifactId>
+				<version>3.5.7</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.taobao.eagleeye</groupId>
+						<artifactId>eagleeye-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.taobao.tair</groupId>
+						<artifactId>tair-mc-client</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.taobao.tair</groupId>
+						<artifactId>tair-client</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.common.monitor</groupId>
+				<artifactId>common-monitor</artifactId>
+				<version>1.0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.common.tair</groupId>
+				<artifactId>common-tair</artifactId>
+				<version>2.2.4.7</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- 安全模块版本 -->
+			<dependency>
+				<groupId>com.taobao.common.uic.uic-security</groupId>
+				<artifactId>common-uic-security</artifactId>
+				<version>1.0.9</version>
+			</dependency>
+			<!-- TaobaoUIC end -->
+
+			<!-- 结算 begin -->
+			<dependency>
+				<groupId>com.taobao.settle.ecpm</groupId>
+				<artifactId>settle-ecpm-common</artifactId>
+				<version>1.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.settle.ecpmdailysettle</groupId>
+				<artifactId>settle-ecpmdailysettle-common</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.settle.simbapay</groupId>
+				<artifactId>simbapay-gateway-sdk</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+            <dependency>
+                <groupId>com.taobao.settle.waiter</groupId>
+                <artifactId>settle-waiter-common</artifactId>
+                <version>1.0.7-SNAPSHOT</version>
+            </dependency>
+			<!-- 结算 end -->
+
+			<!-- keycenter begin -->
+			<dependency> 
+				<groupId>com.taobao.common.keycenter.keycenter-common</groupId>
+				<artifactId>common-keycenter-common</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency> 
+				<groupId>com.taobao.common.keycenter.keycenter-client</groupId> 
+				<artifactId>common-keycenter-client</artifactId> 
+				<version>1.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+                </exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.netty</groupId>
+				<artifactId>netty</artifactId>
+				<version>3.2.0.ALPHA4</version>
+			</dependency>
+			<!-- keycenter end -->
+			
+			<!-- algo interface begin -->
+			<dependency>
+				 <groupId>com.taobao.ad.algo.nereus.x_service</groupId>
+				 <artifactId>nereus-x-service-interface</artifactId>
+				 <version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<!-- algo interface end -->
+
+			<!-- retry begin -->
+            <dependency>
+                <groupId>com.github.rholder</groupId>
+                <artifactId>guava-retrying</artifactId>
+                <version>1.0.5</version>
+            </dependency>
+            <!-- retry end -->
+            
+			<!-- 集团日志中心 begin -->
+			<dependency>
+				<groupId>com.ali.luna</groupId>
+				<artifactId>exsession</artifactId>
+				<version>2.2.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.ali.luna.log</groupId>
+				<artifactId>grouplog</artifactId>
+				<version>1.0.0</version>				
+			</dependency>
+			<!-- 集团日志中心 end -->
+
+			<!-- springMVC 上传 begin -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<!-- springMVC 上传 end -->
+
+			<!-- eagleeye begin -->
+			<dependency>
+				<groupId>com.taobao.eagleeye</groupId>
+				<artifactId>eagleeye-core</artifactId>
+				<version>1.3.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taobao.eagleeye</groupId>
+				<artifactId>eagleeye-logs</artifactId>
+				<version>1.3.0</version>
+			</dependency>
+			<!-- eagleeye end -->
+
+			<!-- metaq begin -->
+			<dependency>
+				<groupId>com.taobao.metaq.final</groupId>
+				<artifactId>metaq-client</artifactId>
+				<version>3.2.0</version>
+			</dependency>
+			<!-- metaq begin -->
+
+            <!-- 报表平台 begin -->
+            <dependency>
+                <groupId>com.taobao.ad.dps</groupId>
+                <artifactId>dps-rptservice-interface</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+            <!-- 报表平台 end -->
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>1.7.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.taobao.ad.tanx.service</groupId>
+                <artifactId>tanx-service-interface</artifactId>
+                <version>1.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.8-beta3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <!-- beanutils begin -->
+            <dependency>
+			    <groupId>commons-beanutils</groupId>
+			    <artifactId>commons-beanutils</artifactId>
+			    <version>1.9.1</version>
+			</dependency>
+			<!-- beanutils end -->
+
+			<dependency>
+				<groupId>com.taobao.media</groupId>
+				<artifactId>media-tools</artifactId>   
+				<version>1.0.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+            <dependency>
+                <groupId>com.alimama.ecpm.baseService</groupId>
+                <artifactId>base-hsfsdk</artifactId>
+                <version>1.0.6${dependency.version.ext}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>solar-core</artifactId>
+                        <groupId>com.alibaba.solar.commons</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.9.0</version>
+                <scope>test</scope>
+            </dependency>
+			
+			<dependency>
+				<groupId>com.alibaba.solar.klio</groupId>
+				<artifactId>klio-client</artifactId>
+				<version>1.0.9</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.solar.commons</groupId>
+				<artifactId>solar-core</artifactId>
+				<version>1.1.9</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+	
+	<!-- modules config -->
+	<modules>
+		<module>ultron-core</module>
+		<module>ultron-i18n</module>
+		<module>ultron-dal</module>
+		<module>ultron-biz</module>		
+		<module>ultron-crm</module>		
+		<module>ultron-site</module>
+		<module>ultron-api</module>
+        <module>deploy</module>
+		<module>config</module>
+    </modules>
+	
+	<!-- build config -->
+	<build>
+		<filters>
+			<filter>../config/${props}.properties</filter>
+		</filters>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <projectnatures>
+                        <java.lang.String>com.genuitec.eclipse.j2eedt.core.webnature</java.lang.String>
+                        <java.lang.String>org.eclipse.jdt.core.javanature</java.lang.String>
+                    </projectnatures>
+                    <outputDirectory>target/eclipse-classes</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <failIfNoTests>false</failIfNoTests>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/web.xml</include>
+                                <include>**/indexbp.html</include>
+                                <include>**/swagger.properties</include>
+                            </includes>
+						</resource>
+					</webResources>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.5.4</version>
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                    <xmlOutputDirectory>target/site</xmlOutputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+					<instrumentation>
+						<includes>
+							<include>com/taobao/ad/ultron/biz/bo/**/*.class</include>
+						</includes>
+					</instrumentation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.5</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.alibaba.maven.plugins</groupId>
+				<artifactId>maven-pv-plugin</artifactId>
+				<version>1.1-SNAPSHOT</version>
+				<executions>
+				  <execution>
+				    <id>check-war</id>
+				    <goals>
+				      <goal>check-war</goal>
+				    </goals>
+				  </execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
+    
+	<!-- add jar address -->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>releases</name>
+			<url>http://mvnrepo.taobao.ali.com:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>snapshots</name>
+			<url>http://mvnrepo.taobao.ali.com:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>	
