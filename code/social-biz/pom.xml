@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- basic config -->
+	<artifactId>social-biz</artifactId>
+	<packaging>jar</packaging>
+	<version>${social-biz.version}${dependency.version.ext}</version>
+	<name>social-biz</name>
+	
+	<!-- parent config -->
+	<parent>
+		<groupId>com.work.app.dog</groupId>
+		<artifactId>dog</artifactId>
+		<version>1.0.0${dependency.version.ext}</version>
+	</parent>
+	
+	<!-- dependency config -->
+	<dependencies>
+		<!-- dog inner begin -->
+		<dependency>
+			<groupId>com.work.app.dog</groupId>
+			<artifactId>social-core</artifactId>
+			<version>${social-core.version}${dependency.version.ext}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.work.app.dog</groupId>
+			<artifactId>social-dal</artifactId>
+			<version>${social-dal.version}${dependency.version.ext}</version>
+		</dependency>
+		<!-- dog inner end -->
+		
+		<!-- dozer begin -->
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+		</dependency>
+		<!-- dozer end -->
+
+		<dependency>
+  			<groupId>commons-io</groupId>
+  			<artifactId>commons-io</artifactId>
+  			<version>1.3.2</version>
+		</dependency>
+		
+		<!-- spring test begin -->
+		<dependency>
+			<groupId>com.taobao.anntest</groupId>
+			<artifactId>anntest-spring3</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- spring test end -->
+		
+		<!-- retry begin -->
+        <dependency>
+             <groupId>com.github.rholder</groupId>
+             <artifactId>guava-retrying</artifactId>
+        </dependency>
+        <!-- retry end -->
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>social-biz</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+	        </plugin>
+        </plugins>
+	</build>
+</project>

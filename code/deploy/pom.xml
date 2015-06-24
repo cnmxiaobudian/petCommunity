@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <groupId>com.work.app.dog</groupId>
+        <artifactId>dog</artifactId>
+		<version>1.0.0${dependency.version.ext}</version>
+	</parent>
+	<artifactId>deploy</artifactId>
+	<name>deploy</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <finalName>${scm.app.name}</finalName>
+                    <descriptors>
+                        <descriptor>../conf/assembly-${scm.app.name}.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>./target</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
