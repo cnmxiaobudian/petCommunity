@@ -24,6 +24,26 @@
         </dependency>
 
 		<!-- TODO DB connection, BoneCP -->
+		<!-- ibatis begin -->
+		<dependency>
+			<groupId>com.ibatis</groupId>
+			<artifactId>ibatis</artifactId>
+		</dependency>
+		<!-- ibatis end -->
+
+		<!-- mysql begin -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- mysql end -->
+
+		<!-- bonecp end -->
+		<dependency>
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+		</dependency>
+		<!-- bonecp end -->
 
 	</dependencies>
 	
